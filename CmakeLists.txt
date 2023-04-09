@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.26.2 FATAL_ERROR)
+
+project(Tables)
+
+add_library(Table src/Table.h src/Table.cpp)
+add_library(UnsortedTable src/UnsortedTable.h src/UnsortedTable.cpp)
+add_library(UnsortedTableTest tests/UnsortedTableTest.h tests/UnsortedTableTest.cpp)
+
+add_executable(Tables 
+	src/main.cpp
+	#src/Table.h 
+	#src/UnsortedTable.h 
+	#src/UnsortedTable.cpp
+	#tests/UnsortedTableTest.h 
+	#tests/UnsortedTableTest.cpp
+)
+
+target_link_libraries(UnsortedTable PRIVATE Table)
+target_link_libraries(UnsortedTableTest PRIVATE UnsortedTable)
+target_link_libraries(Tables PRIVATE UnsortedTableTest)
+
+
+
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Tables)
