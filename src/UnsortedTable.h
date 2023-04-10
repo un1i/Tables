@@ -2,6 +2,8 @@
 #include "Table.h"
 
 class UnsortedTable : public Table {
+private:
+	int search(const std::string& key);
 protected:
 	Entry* entries;
 	int MAX_SIZE;
@@ -9,7 +11,7 @@ protected:
 public:
 	explicit UnsortedTable(int MAX_SIZE = 1000);
 	UnsortedTable(const UnsortedTable&);
-	int search(const std::string& key);
+	~UnsortedTable();
 	void add(const std::string& key) override;
 	int del(const std::string& key) override;
 	int get(const std::string& key) override;

@@ -13,6 +13,10 @@ UnsortedTable::UnsortedTable(const UnsortedTable& other) : Table(), MAX_SIZE(oth
 		entries[i] = other.entries[i];
 }
 
+UnsortedTable:: ~UnsortedTable() {
+	delete[] entries;
+}
+
 int UnsortedTable::search(const std::string& key){
 	for (int i = 0; i < cur_size; i++) {
 		counter++;

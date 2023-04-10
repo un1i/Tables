@@ -4,7 +4,9 @@ project(Tables)
 
 add_library(Table src/Table.h src/Table.cpp)
 add_library(UnsortedTable src/UnsortedTable.h src/UnsortedTable.cpp)
+add_library(SortedTable src/SortedTable.h src/SortedTable.cpp)
 add_library(UnsortedTableTest tests/UnsortedTableTest.h tests/UnsortedTableTest.cpp)
+add_library(SortedTableTest tests/SortedTableTest.h tests/SortedTableTest.cpp)
 
 add_executable(Tables 
 	src/main.cpp
@@ -17,7 +19,9 @@ add_executable(Tables
 
 target_link_libraries(UnsortedTable PRIVATE Table)
 target_link_libraries(UnsortedTableTest PRIVATE UnsortedTable)
-target_link_libraries(Tables PRIVATE UnsortedTableTest)
+target_link_libraries(SortedTable PRIVATE UnsortedTable)
+target_link_libraries(SortedTableTest PRIVATE SortedTable)
+target_link_libraries(Tables PRIVATE UnsortedTableTest PRIVATE SortedTableTest)
 
 
 
