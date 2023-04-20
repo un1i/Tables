@@ -7,6 +7,18 @@ struct Entry {
 	int value;
 };
 
+class Node {
+public:
+	Node* left;
+	Node* right;
+	int dif;
+	Entry data;
+	Node(const std::string& key = "", int val = 0) :left(nullptr), right(nullptr), dif(0) {
+		data.key = key;
+		data.value = val;
+	}
+};
+
 
 class Table {
 protected:
