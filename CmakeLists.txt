@@ -9,6 +9,8 @@ add_library(UnsortedTableTest tests/UnsortedTableTest.h tests/UnsortedTableTest.
 add_library(SortedTableTest tests/SortedTableTest.h tests/SortedTableTest.cpp)
 add_library(Stack stack/Stack.h stack/Stack.cpp)
 add_library(Queue queue/queue.h queue/queue.cpp)
+add_library(List list/List.h List/List.cpp)
+add_library(HashTable src/HashTable.h src/HashTable.cpp)
 add_library(BSTTable src/BSTTable.h src/BSTTable.cpp)
 
 add_executable(Tables 
@@ -24,15 +26,23 @@ target_link_libraries(UnsortedTable PRIVATE Table)
 target_link_libraries(UnsortedTableTest PRIVATE UnsortedTable)
 target_link_libraries(SortedTable PRIVATE UnsortedTable)
 target_link_libraries(SortedTableTest PRIVATE SortedTable)
+target_link_libraries(Queue PRIVATE Table)
+target_link_libraries(Stack PRIVATE Table)
+target_link_libraries(List PRIVATE Table)
 target_link_libraries(BSTTable 
 	PRIVATE Table 
 	PRIVATE Stack
 	INTERFACE Queue
 )
+target_link_libraries(HashTable 
+	PRIVATE Table
+	PRIVATE List
+)
 target_link_libraries(Tables 
 	PRIVATE UnsortedTableTest 
 	PRIVATE SortedTableTest
 	PRIVATE BSTTable
+	PRIVATE HashTable
 )
 
 
