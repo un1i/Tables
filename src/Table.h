@@ -43,4 +43,5 @@ public:
 	virtual int get(const std::string&) = 0;
 	virtual bool is_empty() const = 0;
 	virtual bool is_full() const = 0;
+	virtual int get_counter() { return counter; }
 };

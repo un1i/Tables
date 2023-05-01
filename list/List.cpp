@@ -57,6 +57,8 @@ void List::add(const std::string key, int& counter) {
 	counter++;
 
 	if (prev == nullptr) {
+		if (is_full())
+			throw std::length_error("В таблице нет места для добавления нового элемента!");
 		new_link = new Link(key, 1);
 		new_link->next = first->next;
 		first->next = new_link;
@@ -108,6 +110,12 @@ void List::print(int index) {
 
 bool List::is_empty() {
 	return first->next == first;
+}
+
+bool List::is_full() {
+	Link* tmp;
+	tmp = new Link;
+	return tmp == nullptr;
 }
 
 void List::clear() {

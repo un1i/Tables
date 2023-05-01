@@ -15,7 +15,7 @@ void BSTTable::add(const std::string& key) {
 	prev = nullptr;
 
 	counter = 0;
-	if (root == nullptr) {
+	if (is_empty()) {
 		root = new Node(key, 1);
 		return;
 	}
@@ -40,6 +40,9 @@ void BSTTable::add(const std::string& key) {
 	}
 
 	counter++;
+	if (is_full())
+		throw std::length_error("В таблице нет места для добавления нового элемента!");
+
 	new_node = new Node(key, 1);
 	if (key > prev->data.key)
 		prev->right = new_node;
@@ -325,6 +328,10 @@ bool BSTTable::is_full() const {
 }
 
 void BSTTable::print() const {
+	if (is_empty()) {
+		std::cout << "В таблице нет элементов" << std::endl;
+		return;
+	}
 	std::cout << std::setw(30) << std::left << "WORD" <<
 		std::setw(30) << std::left << "AMOUNT" << std::endl;
 	rec_print_tree(root);
@@ -347,8 +354,10 @@ void BSTTable::print_tree() const {
 	Node* child;
 	Queue queue;
 
-	if (root == nullptr)
+	if (root == nullptr) {
+		std::cout << "Пустое дерево\n";
 		return;
+	}
 
 	last = root;
 	queue.push(root);

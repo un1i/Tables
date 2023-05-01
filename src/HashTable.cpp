@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
-HashTable::HashTable() {
+HashTable::HashTable() : Table() {
 	entries = new List[SIZE];
 }
 
@@ -45,6 +45,11 @@ int HashTable::get(const std::string& key) {
 }
 
 void HashTable::print() const {
+	if (is_empty()) {
+		std::cout << "В таблице нет элементов" << std::endl;
+		return;
+	}
+
 	std::cout << std::setw(30) << std::left << "INDEX" <<
 		std::setw(30) << std::left << "WORD" <<
 		std::setw(30) << std::left << "AMOUNT" << std::endl;

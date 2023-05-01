@@ -15,5 +15,6 @@ public:
 	int get(const std::string key, int& counter);
 	void print(int index);
 	bool is_empty();
+	bool is_full();
 	void clear();
 };

@@ -34,7 +34,7 @@ void UnsortedTable::add(const std::string& key) {
 		entries[search_res].value++;
 	else {
 		if (is_full())
-			std::length_error("В таблице нет места для добавления нового элемента!");
+			throw std::length_error("В таблице нет места для добавления нового элемента!");
 		else {
 			entries[cur_size].key = key;
 			entries[cur_size].value = 1;
@@ -76,6 +76,11 @@ bool UnsortedTable::is_full() const {
 }
 
 void UnsortedTable::print() const {
+	if (is_empty()) {
+		std::cout << "В таблице нет элементов" << std::endl;
+		return;
+	}
+
 	std::cout << std::setw(30) << std::left << "WORD" <<
 		std::setw(30) << std::left << "AMOUNT" << std::endl;
 	for (int i = 0; i < cur_size; i++)

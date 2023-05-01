@@ -36,7 +36,7 @@ void SortedTable::add(const std::string& key) {
 		entries[index].value += 1;
 	else
 		if (is_full())
-			std::length_error("В таблице нет места для добавления нового элемента!");
+			throw std::length_error("В таблице нет места для добавления нового элемента!");
 		else {
 			for (int i = cur_size - 1; i >= index; i--) {
 				counter++;
