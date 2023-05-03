@@ -21,14 +21,14 @@ void read_file(vector <string>& words) {
 
 	while (getline(f, line)) {
 		size_t prev = 0, pos;
-		pos = line.find_first_of(" ,;.", prev);
+		pos = line.find_first_of(" ,;.\t", prev);
 		while (pos != string::npos) {
 			if (pos > prev) {
 				word = line.substr(prev, pos - prev);
 				words.push_back(word);
 			}
 			prev = pos + 1;
-			pos = line.find_first_of(" ,;.", prev);
+			pos = line.find_first_of(" ,;.\t", prev);
 		}
 		if (prev < line.size())
 			words.push_back(line.substr(prev, string::npos));
@@ -86,7 +86,7 @@ cout << "Введите 0, чтобы вернуться к выбору таблицы\n";
 			cin >> key;
 			try {
 				table->add(key);
-				cout << "Элемент успешно добавлен!\nКоличество операци для добавления: " << table->get_counter() << endl;
+				cout << "Элемент успешно добавлен!\nКоличество операций для добавления: " << table->get_counter() << endl;
 			}
 			catch (exception e) {
 				cout << e.what() << endl;
@@ -99,7 +99,7 @@ cout << "Введите 0, чтобы вернуться к выбору таблицы\n";
 			cout << "Введите ключ: ";
 			cin >> key;
 			table->del(key);
-			cout << "Элемент успешно удален!\nКоличество операци для удаления: " << table->get_counter() << endl;
+			cout << "Элемент успешно удален!\nКоличество операций для удаления: " << table->get_counter() << endl;
 			break;
 		}
 		case 4: {
@@ -145,7 +145,7 @@ int main() {
 	SetConsoleOutputCP(1251);
 	vector <string> words;
 	int exit = 1, menu;
-	Table* tables[] = { new UnsortedTable, new SortedTable, new BSTTable, new HashTable };
+	Table* tables[4] = {new UnsortedTable, new SortedTable, new BSTTable, new HashTable};
 
 	while(exit){
 		cout << "Введите 1, чтобы ввести текст из файла\n\
@@ -207,4 +207,7 @@ int main() {
 		}
 		}
 	}
+
+	for (auto tb : tables)
+		delete tb;
 }

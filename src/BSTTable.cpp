@@ -14,7 +14,7 @@ void BSTTable::add(const std::string& key) {
 	stack = new Stack;
 	prev = nullptr;
 
-	counter = 0;
+	counter = 1;
 	if (is_empty()) {
 		root = new Node(key, 1);
 		return;
@@ -145,12 +145,13 @@ int BSTTable::del(const std::string& key) {
 	}
 	delete cur;
 	balance_after_del(del_node_is_right, stack);
+	return res;
 }
 
 int BSTTable::get(const std::string& key) {
 	int res = 0;
 	Node* cur;
-	counter = 0;
+	counter = 1;
 	cur = root;
 	while (cur != nullptr) {
 		counter++;

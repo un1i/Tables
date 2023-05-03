@@ -60,7 +60,7 @@ int UnsortedTable:: del(const std::string& key) {
 int UnsortedTable::get(const std::string& key) {
 	int res = 0;
 	int search_res;
-	counter = 0;
+	counter = 1;
 	search_res = search(key);
 	if (search_res > -1)
 		res = entries[search_res].value;

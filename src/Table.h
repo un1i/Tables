@@ -37,6 +37,7 @@ protected:
 	int counter;
 public:
 	Table(): counter(0) {};
+	virtual ~Table() {};
 	virtual void add(const std::string&) = 0;
 	virtual int del(const std::string&) = 0;
 	virtual void print() const = 0;
