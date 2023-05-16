@@ -231,16 +231,16 @@ void BSTTable::balance_after_add(Node* child, Stack* stack) {
 
 void BSTTable::left_rotate(Node*& parent, Node* prev_parent) {
 	Node* right;
-	Node* tmp = parent;
 	right = parent->right;
-	if (prev_parent != nullptr)
+	if (prev_parent != nullptr) {
 		if (prev_parent->right == parent)
 			prev_parent->right = right;
 		else
 			prev_parent->left = right;
+	}
 	else
 		root = right;
-	tmp = tmp;
+
 	if (right->dif == 0)
 		parent->dif = -1;
 	else 
@@ -255,11 +255,12 @@ void BSTTable::left_rotate(Node*& parent, Node* prev_parent) {
 void BSTTable::right_rotate(Node*& parent, Node* prev_parent) {
 	Node* left;
 	left = parent->left;
-	if (prev_parent != nullptr)
+	if (prev_parent != nullptr) {
 		if (prev_parent->right == parent)
 			prev_parent->right = left;
 		else
 			prev_parent->left = left;
+	}
 	else
 		root = left;
 
@@ -325,6 +326,7 @@ bool BSTTable::is_full() const {
 	check = new Node;
 	if (check == nullptr)
 		res = true;
+	delete check;
 	return res;
 }
 
@@ -365,31 +367,25 @@ void BSTTable::print_tree() const {
 	while (!queue.is_empty()) {
 		child = nullptr;
 		parent = queue.pop();
-		if (parent == nullptr) {
-			std::cout << "(Null, Null)\t";
-			continue;
-		}
 		std::cout << '(' << parent->data.key << ", " << parent->data.value << ")\t";
 
 		if (parent->left != nullptr) {
 			child = parent->left;
 			queue.push(child);
 		}
-		else
-			queue.push(nullptr);
+
 
 		if (parent->right != nullptr) {
 			child = parent->right;
 			queue.push(child);
 		}
-		else
-			queue.push(nullptr);
 
 		if (parent == last) {
 			std::cout << '\n';
 			last = child;
 		}
 	}
+	std::cout << '\n';
 }
 
 void BSTTable::delete_tree(Node* node) {

@@ -115,7 +115,9 @@ bool List::is_empty() {
 bool List::is_full() {
 	Link* tmp;
 	tmp = new Link;
-	return tmp == nullptr;
+	bool res = tmp == nullptr;
+	delete tmp;
+	return res;
 }
 
 void List::clear() {
