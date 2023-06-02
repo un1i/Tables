@@ -96,7 +96,10 @@ int BSTTable::del(const std::string& key) {
 	}
 
 	counter++;
-	prev = stack->top();
+	if (stack->is_empty())
+		prev = nullptr;
+	else
+		prev = stack->top();
 	if (cur->left == nullptr && cur->right == nullptr) {
 		if (prev->left == cur) {
 			del_node_is_right = false;
@@ -106,20 +109,26 @@ int BSTTable::del(const std::string& key) {
 			prev->right = nullptr;
 	}
 	else if (cur->left == nullptr) {
-		if (prev->left == cur) {
-			del_node_is_right = false;
-			prev->left = cur->right;
-		}
+		if (prev != nullptr)
+			if (prev->left == cur) {
+				del_node_is_right = false;
+				prev->left = cur->right;
+			}
+			else
+				prev->right = cur->right;
 		else
-			prev->right = cur->right;
+			root = cur->right;
 	}
 	else if (cur->right == nullptr) {
-		if (prev->left == cur) {
-			del_node_is_right = false;
-			prev->left = cur->left;
-		}
+		if (prev != nullptr)
+			if (prev->left == cur) {
+				del_node_is_right = false;
+				prev->left = cur->left;
+			}
+			else
+				prev->right = cur->left;
 		else
-			prev->right = cur->left;
+			root = cur->left;
 	}
 	else {
 		stack->push(cur);
